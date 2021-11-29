@@ -60,6 +60,8 @@ namespace Hosts.Repository.Engine
 
         public async Task Save(T model)
         {
+            await EnsureFileStore();
+
             var oldState = await Get();
 
             var alreadySavedModel = oldState.FirstOrDefault(x => x.Id == model.Id);
@@ -81,6 +83,8 @@ namespace Hosts.Repository.Engine
 
         public async Task<IEnumerable<T>> Get()
         {
+            await EnsureFileStore();
+
             string fileString = string.Empty;
             await QueueTask(async () => {
                 fileString = await File.ReadAllTextAsync(FilePath);
@@ -93,6 +97,8 @@ namespace Hosts.Repository.Engine
 
         public async Task<T> GetById(string id)
         {
+            await EnsureFileStore();
+
             var allModels = await Get();
 
             var model = allModels.FirstOrDefault(x => x.Id == id);
@@ -102,6 +108,8 @@ namespace Hosts.Repository.Engine
 
         public async Task Delete(T model)
         {
+            await EnsureFileStore();
+            
             var oldState = await Get();
 
             var alreadySavedModel = oldState.FirstOrDefault(x => x.Id == model.Id);
