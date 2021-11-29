@@ -1,8 +1,8 @@
 using System;
 
-namespace Hosts.ShopBot.Models
+namespace Hosts.Repository.Models
 {
-    public class Alert
+    public class Alert : BaseModel
     {
         public string Contents { get; set; }
 

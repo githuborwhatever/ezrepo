@@ -19,4 +19,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../Host/Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <None Update="data/canary" CopyToOutputDirectory="PreserveNewest" />
+</ItemGroup>
+
 </Project>
